@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, FlatList } from 'react-native'
 import React, { useState } from 'react'
 import Todo from '../components/Todo'
+import { ScrollView } from 'react-native-web'
 
 const Home = ({ todos, setTodos }) => {
 
-    const [input, setInput] = useState(null)
+    const [input, setInput] = useState("")
 
     const addTodo = () => {
         if (!input) {
@@ -50,12 +51,13 @@ const Home = ({ todos, setTodos }) => {
             <View style={styles.todoContainer}>
                 <View style={styles.top}>
                     <Text style={styles.title}>Your Todo's ({todos ? todos.length : 0})</Text>
-                    <TouchableOpacity><Text style={styles.clearBtn}>clear all</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => setTodos([])}><Text style={styles.clearBtn}>clear all</Text></TouchableOpacity>
                 </View>
                 <View style={styles.todos}>
                     <FlatList
                         keyExtractor={(item) => item._id}
                         data={todos}
+                        showsVerticalScrollIndicator={false}
                         renderItem={({ item }) => {
                             return (
                                 <Todo
@@ -76,9 +78,10 @@ const Home = ({ todos, setTodos }) => {
 const styles = StyleSheet.create({
     container: {
         height: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.01)"
     },
     header: {
-        backgroundColor: "rgba(0, 0, 0, 0.1)",
+        backgroundColor: "#fff",
         paddingHorizontal: 20,
         paddingTop: 35,
         borderBottomLeftRadius: 30,
@@ -135,6 +138,7 @@ const styles = StyleSheet.create({
     },
     todos: {
         marginTop: 20,
+        height: "70%",
     }
 })
 

@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/screens/Home';
 import EditTodo from './src/screens/EditTodo';
+import { ScrollView } from 'react-native-web';
 
 export default function App() {
 

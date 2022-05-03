@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import CheckBox from "expo-checkbox";
 
@@ -10,14 +10,18 @@ const Todo = ({ todo, deleteTodo, invertStatus, updateTodoText }) => {
                 value={todo.completed}
                 onValueChange={() => invertStatus(todo._id)}
                 color={todo.completed ? "#4630EB" : undefined}
+                style={styles.checkbox}
             />
-            <Text style={styles.text}>{todo.text}</Text>
+            <Text style={[styles.text, {
+                textDecorationLine: todo.completed ? "line-through" : "none",
+                color: todo.completed ? "grey" : "black"
+            }]}>{todo.text}</Text>
             <View style={styles.controls}>
-                <TouchableOpacity style={styles.rightAlign}>
-                    <Text>e</Text>
+                <TouchableOpacity style={styles.icons}>
+                    <Image source={require('../../assets/icons/edit.png')} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.rightAlign} onPress={() => deleteTodo(todo._id)}>
-                    <Text>d</Text>
+                <TouchableOpacity style={styles.icons} onPress={() => deleteTodo(todo._id)}>
+                    <Image source={require('../../assets/icons/delete.png')} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -27,8 +31,8 @@ const Todo = ({ todo, deleteTodo, invertStatus, updateTodoText }) => {
 const styles = StyleSheet.create({
     todoCont: {
         paddingVertical: 9,
-        paddingHorizontal: 20,
-        backgroundColor: "rgba(0, 0, 0, 0.1)",
+        paddingHorizontal: 10,
+        backgroundColor: "#fff",
         flexDirection: "row",
         marginTop: 10,
         position: "relative",
@@ -36,6 +40,8 @@ const styles = StyleSheet.create({
     },
     text: {
         marginHorizontal: 9,
+        fontSize: 16,
+        fontWeight: "600",
     },
     controls: {
         flexDirection: "row",
@@ -44,8 +50,11 @@ const styles = StyleSheet.create({
         right: 9,
         top: 9,
     },
-    rightAlign: {
-        marginHorizontal: 3,
+    icons: {
+        marginHorizontal: 4,
+    },
+    checkbox: {
+        borderRadius: 100,
     }
 })
 
