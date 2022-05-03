@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, FlatList } from 'react-native'
 import React, { useState } from 'react'
+import Todo from '../components/Todo'
 
 const Home = ({ todos, setTodos }) => {
 
@@ -13,7 +14,25 @@ const Home = ({ todos, setTodos }) => {
 
         setTodos([...todos, { completed: false, text: input, _id: new Date().toString() }])
         setInput("")
-        console.log(todos)
+    }
+
+    const deleteTodo = _id => {
+        const updatedTodos = todos.filter(todo => todo._id !== _id)
+        setTodos(updatedTodos)
+    }
+
+    const invertStatus = _id => {
+        const updatedTodos = todos.map(todo => {
+            return todo._id === _id ? { ...todo, completed: !todo.completed } : todo
+        })
+        setTodos(updatedTodos)
+    }
+
+    const updateTodoText = (_id, newText) => {
+        const updatedTodos = todos.map(todo => {
+            return todo._id === _id ? { ...todo, text: newText } : todo
+        })
+        setTodos(updatedTodos)
     }
 
     return (
@@ -30,8 +49,24 @@ const Home = ({ todos, setTodos }) => {
             </View>
             <View style={styles.todoContainer}>
                 <View style={styles.top}>
-                    <Text style={styles.title}>Your Todo's ({4})</Text>
+                    <Text style={styles.title}>Your Todo's ({todos ? todos.length : 0})</Text>
                     <TouchableOpacity><Text style={styles.clearBtn}>clear all</Text></TouchableOpacity>
+                </View>
+                <View style={styles.todos}>
+                    <FlatList
+                        keyExtractor={(item) => item._id}
+                        data={todos}
+                        renderItem={({ item }) => {
+                            return (
+                                <Todo
+                                    todo={item}
+                                    deleteTodo={deleteTodo}
+                                    invertStatus={invertStatus}
+                                    updateTodoText={updateTodoText}
+                                />
+                            )
+                        }}
+                    />
                 </View>
             </View>
         </View>
@@ -97,6 +132,9 @@ const styles = StyleSheet.create({
         position: "relative",
         top: 7,
         color: "#0000FF"
+    },
+    todos: {
+        marginTop: 20,
     }
 })
 
