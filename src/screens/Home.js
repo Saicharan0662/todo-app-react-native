@@ -1,13 +1,30 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native'
+import React, { useState } from 'react'
 
-const Home = () => {
+const Home = ({ todos, setTodos }) => {
+
+    const [input, setInput] = useState(null)
+
+    const addTodo = () => {
+        if (!input) {
+            Alert.alert("Please enter the todo")
+            return;
+        }
+
+        setTodos([...todos, { completed: false, text: input, _id: new Date().toString() }])
+        setInput("")
+        console.log(todos)
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Task Manager</Text>
-                <TextInput placeholder='Going for walk!' style={styles.todoInput} />
-                <TouchableOpacity style={styles.btn}>
+                <TextInput placeholder='Going for walk!' style={styles.todoInput}
+                    value={input}
+                    onChangeText={text => setInput(text)}
+                />
+                <TouchableOpacity style={styles.btn} onPress={() => addTodo()}>
                     <Text style={styles.btnText}>Create!</Text>
                 </TouchableOpacity>
             </View>
