@@ -47,20 +47,22 @@ const Home = ({ todos, setTodos }) => {
                     <TouchableOpacity onPress={() => setTodos([])}><Text style={styles.clearBtn}>clear all</Text></TouchableOpacity>
                 </View>
                 <View style={styles.todos}>
-                    <FlatList
-                        keyExtractor={(item) => item._id}
-                        data={todos}
-                        showsVerticalScrollIndicator={false}
-                        renderItem={({ item }) => {
-                            return (
-                                <Todo
-                                    todo={item}
-                                    deleteTodo={deleteTodo}
-                                    invertStatus={invertStatus}
-                                />
-                            )
-                        }}
-                    />
+                    {(todos && todos.length > 0) ?
+                        <FlatList
+                            keyExtractor={(item) => item._id}
+                            data={todos}
+                            showsVerticalScrollIndicator={true}
+                            renderItem={({ item }) => {
+                                return (
+                                    <Todo
+                                        todo={item}
+                                        deleteTodo={deleteTodo}
+                                        invertStatus={invertStatus}
+                                    />
+                                )
+                            }}
+                        /> :
+                        <Text style={styles.notodoText}>No todos yet!</Text>}
                 </View>
             </View>
         </View>
@@ -131,6 +133,14 @@ const styles = StyleSheet.create({
     todos: {
         marginTop: 20,
         height: "70%",
+    },
+    notodoText: {
+        fontSize: 18,
+        fontWeight: "bold",
+        textAlign: "center",
+        position: "relative",
+        top: 30,
+        textTransform: "uppercase"
     }
 })
 
