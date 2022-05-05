@@ -1,25 +1,34 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, FlatList } from 'react-native'
 import React, { useState } from 'react'
 import Todo from '../components/Todo'
-import { ScrollView } from 'react-native-web'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const storeData = async (value) => {
+    try {
+        await AsyncStorage.setItem('todos', JSON.stringify(value))
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 const Home = ({ todos, setTodos }) => {
 
-    const [input, setInput] = useState("")
+    const [input, setInput] = useState()
 
     const addTodo = () => {
         if (!input) {
             Alert.alert("Please enter the todo")
             return;
         }
-
         setTodos([...todos, { completed: false, text: input, _id: new Date().toString() }])
         setInput("")
+        storeData([...todos, { completed: false, text: input, _id: new Date().toString() }])
     }
 
     const deleteTodo = _id => {
         const updatedTodos = todos.filter(todo => todo._id !== _id)
         setTodos(updatedTodos)
+        storeData(updatedTodos)
     }
 
     const invertStatus = _id => {
@@ -27,6 +36,7 @@ const Home = ({ todos, setTodos }) => {
             return todo._id === _id ? { ...todo, completed: !todo.completed } : todo
         })
         setTodos(updatedTodos)
+        storeData(updatedTodos)
     }
 
     return (
