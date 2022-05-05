@@ -11,6 +11,13 @@ export default function App() {
   const Stack = createNativeStackNavigator()
   const [todos, setTodos] = useState([])
 
+  const updateTodoText = (_id, newText) => {
+    const updatedTodos = todos.map(todo => {
+      return todo._id === _id ? { ...todo, text: newText } : todo
+    })
+    setTodos(updatedTodos)
+  }
+
   return (
     <View style={styles.container}>
       <NavigationContainer initialScreen="Home">
@@ -18,8 +25,8 @@ export default function App() {
           <Stack.Screen name="Home" options={{ headerShown: false }}>
             {props => <Home {...props} todos={todos} setTodos={setTodos} />}
           </Stack.Screen>
-          <Stack.Screen name="Edit Todo">
-            {props => <EditTodo {...props} />}
+          <Stack.Screen name="Edit Todo" options={{ headerTitleAlign: "center" }}>
+            {props => <EditTodo {...props} updateTodoText={updateTodoText} />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

@@ -1,8 +1,11 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import CheckBox from "expo-checkbox";
+import { useNavigation } from '@react-navigation/native';
 
-const Todo = ({ todo, deleteTodo, invertStatus, updateTodoText }) => {
+const Todo = ({ todo, deleteTodo, invertStatus }) => {
+
+    const navigation = useNavigation()
 
     return (
         <View style={styles.todoCont}>
@@ -17,7 +20,8 @@ const Todo = ({ todo, deleteTodo, invertStatus, updateTodoText }) => {
                 color: todo.completed ? "grey" : "black"
             }]}>{todo.text}</Text>
             <View style={styles.controls}>
-                <TouchableOpacity style={styles.icons}>
+                <TouchableOpacity style={styles.icons}
+                    onPress={() => navigation.navigate("Edit Todo", { todo: todo })}>
                     <Image source={require('../../assets/icons/edit.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.icons} onPress={() => deleteTodo(todo._id)}>

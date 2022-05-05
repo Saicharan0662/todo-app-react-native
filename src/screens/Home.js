@@ -29,18 +29,11 @@ const Home = ({ todos, setTodos }) => {
         setTodos(updatedTodos)
     }
 
-    const updateTodoText = (_id, newText) => {
-        const updatedTodos = todos.map(todo => {
-            return todo._id === _id ? { ...todo, text: newText } : todo
-        })
-        setTodos(updatedTodos)
-    }
-
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Task Manager</Text>
-                <TextInput placeholder='Going for walk!' style={styles.todoInput}
+                <TextInput placeholder='Complete pending project' style={styles.todoInput}
                     value={input}
                     onChangeText={text => setInput(text)}
                 />
@@ -64,7 +57,6 @@ const Home = ({ todos, setTodos }) => {
                                     todo={item}
                                     deleteTodo={deleteTodo}
                                     invertStatus={invertStatus}
-                                    updateTodoText={updateTodoText}
                                 />
                             )
                         }}
