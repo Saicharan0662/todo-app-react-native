@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, FlatList } from 'react-native'
 import React, { useState } from 'react'
 import Todo from '../components/Todo'
+import Footer from '../components/Footer'
 
 const Home = ({ todos, setTodos, storeData }) => {
 
@@ -71,6 +72,7 @@ const Home = ({ todos, setTodos, storeData }) => {
                         <Text style={styles.notodoText}>No todos yet!</Text>}
                 </View>
             </View>
+            <Footer />
         </View>
     )
 }
