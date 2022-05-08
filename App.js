@@ -8,14 +8,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const storeData = async (value) => {
   try {
-    await AsyncStorage.setItem('todos', JSON.stringify(value))
+    await AsyncStorage.setItem('@todos', JSON.stringify(value))
   } catch (error) {
     console.log(error)
   }
 }
 const getData = async () => {
   try {
-    const todos = await AsyncStorage.getItem('todos')
+    const todos = await AsyncStorage.getItem('@todos')
     return todos !== null ? JSON.parse(todos) : [];
   } catch (e) {
     console.log(error)
@@ -29,7 +29,7 @@ export default function App() {
   const [todos, setTodos] = useState([])
 
   // storeData([{ text: "kdsfsdf", completed: false, _id: new Date().toString() }])
-  console.log(getData())
+  // console.log(getData())
 
   useEffect(async () => {
     setTodos(await getData())
@@ -49,7 +49,7 @@ export default function App() {
       <NavigationContainer initialScreen="Home">
         <Stack.Navigator initialRouteName='Home'>
           <Stack.Screen name="Home" options={{ headerShown: false }}>
-            {props => <Home {...props} todos={todos} setTodos={setTodos} />}
+            {props => <Home {...props} todos={todos} setTodos={setTodos} storeData={storeData} />}
           </Stack.Screen>
           <Stack.Screen name="Edit Todo" options={{ headerTitleAlign: "center" }}>
             {props => <EditTodo {...props} updateTodoText={updateTodoText} />}

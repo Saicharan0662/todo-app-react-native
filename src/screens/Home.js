@@ -1,17 +1,8 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, FlatList } from 'react-native'
 import React, { useState } from 'react'
 import Todo from '../components/Todo'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const storeData = async (value) => {
-    try {
-        await AsyncStorage.setItem('todos', JSON.stringify(value))
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-const Home = ({ todos, setTodos }) => {
+const Home = ({ todos, setTodos, storeData }) => {
 
     const [input, setInput] = useState()
 
@@ -39,6 +30,11 @@ const Home = ({ todos, setTodos }) => {
         storeData(updatedTodos)
     }
 
+    const clearAll = () => {
+        setTodos([])
+        storeData([])
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -54,7 +50,7 @@ const Home = ({ todos, setTodos }) => {
             <View style={styles.todoContainer}>
                 <View style={styles.top}>
                     <Text style={styles.title}>Your Todo's ({todos ? todos.length : 0})</Text>
-                    <TouchableOpacity onPress={() => setTodos([])}><Text style={styles.clearBtn}>clear all</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => clearAll()}><Text style={styles.clearBtn}>clear all</Text></TouchableOpacity>
                 </View>
                 <View style={styles.todos}>
                     {(todos && todos.length > 0) ?
