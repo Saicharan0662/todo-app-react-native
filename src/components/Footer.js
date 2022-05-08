@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <View style={styles.footer}>
             <Text style={styles.infoText} onPress={() => Linking.openURL('https://www.linkedin.com/in/saicharan0662/')}>Made with 💖 by Sai Charan</Text>
-            <Text style={styles.infoText2} onPress={() => Linking.openURL('https://github.com/')}>Source code here</Text>
+            <Text style={styles.infoText2} onPress={() => Linking.openURL('https://github.com/Saicharan0662/todo-app-react-native')}>Source code here</Text>
         </View>
     )
 }
