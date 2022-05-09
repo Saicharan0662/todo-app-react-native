@@ -112,10 +112,9 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         fontSize: 18,
         paddingHorizontal: 20,
-        paddingVertical: 10,
-        borderRadius: 10,
+        paddingVertical: 9,
+        borderRadius: 8,
         backgroundColor: "#008080",
-        width: 100,
         marginVertical: 10,
         alignSelf: "center"
     },
