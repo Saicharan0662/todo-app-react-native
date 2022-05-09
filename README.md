@@ -2,7 +2,7 @@
 This is an open source todo app made using react native. It saves the data using async storage.
 
 ## Download
-- [link to download](https://expo.dev/accounts/saicharan0662/projects/todo-app/builds/914c5d63-757b-46ba-947d-67f19bb88292)
+- [link to download](https://expo.dev/accounts/saicharan0662/projects/todo-app/builds/70913a66-0501-4a1c-bf75-f9725e673c06)
 
 ## Contributing
 Pull requests are welcome.
