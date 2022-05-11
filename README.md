@@ -2,7 +2,7 @@
 This is an open source todo app made using react native. It saves the data using async storage.
 
 ## Screenshots
-![Dashboard](./screenshots/screenshot1.jpeg =200x500)
+<img src="./screenshots/screenshot1.jpeg" alt="dashboard" width="200" height="500" />
 ![Edit-todo-page](./screenshots/screenshot2.jpeg =200x500)
 
 ## Download
