@@ -1,6 +1,10 @@
 # Todoist - Todo App made using React Native
 This is an open source todo app made using react native. It saves the data using async storage.
 
+## Screenshots
+![Dashboard](./screenshots/screenshot1.jpeg)
+![Edit-todo-page](./screenshots/screenshot2.jpeg)
+
 ## Download
 - [link to download](https://expo.dev/accounts/saicharan0662/projects/todo-app/builds/70913a66-0501-4a1c-bf75-f9725e673c06)
 
